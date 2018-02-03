@@ -204,3 +204,8 @@ CRON_CLASSES = [
     "management.cron.MyCronJob",
     # ...
 ]
+try:
+    EVENTBRITE_TOKEN = os.environ["E_TOKEN"]
+except KeyError:
+    print("Error: environment variable E_TOKEN must be set.")
+    exit(1)

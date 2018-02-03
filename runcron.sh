@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-echo "get in runcron.sh success" >> logfile.txt
+echo "running runcron.sh" >> logfile.txt
 echo $PWD >> logfile.txt
-export DB_PASS=321321
-echo "export DB_PASS=321321" >> logfile.txt
-#source home/cky/vp35/bin/activate
-#echo "source /vp35/bin/activate" >> logfile.txt
-#vp35/bin/python project/syndicator/manage.py runcrons > /home/cky/cronjob.log
-#echo "run runcrons" >> logfile.txt
+source /home/cky/project/syndicator/key.sh
+#export DB_PASS={Your password}
+#export E_TOKEN={Your Token}
+
 cd /home/cky/project/syndicator && /home/cky/vp35/bin/python /home/cky/project/syndicator/manage.py runcrons
 
