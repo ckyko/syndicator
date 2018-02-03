@@ -1,6 +1,7 @@
 import logging
 from django_cron import CronJobBase, Schedule
 from .models import Product, ProductType
+
 audit_logger = logging.getLogger('audit')
 
 
@@ -12,6 +13,8 @@ class MyCronJob(CronJobBase):
 
     def do(self):
         audit_logger.info('get in to cron job.....')
-        products = Product.objects.all()
+        products = Product.objects.filter(active=True, is_posted_to_other=False)
         print("in my cron job....... success")
         audit_logger.info('get in to cron job end.....')
+        for product in products:
+            audit_logger.info(str(product))
