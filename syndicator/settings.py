@@ -31,12 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'management',
+    'django_cron',
+
 ]
 
 MIDDLEWARE = [
@@ -125,3 +129,78 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] - %(levelname)s : %(message)s',
+        },
+        'full': {
+            'format': '[%(asctime)s] - %(levelname)s - %(name)s [P%(process)d]: %(message)s',
+        },
+    },
+    'root': {
+        'level': 'DEBUG',
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'django_log': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'tmp/django.log',
+            'formatter': 'full'
+        },
+        'app_log': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'tmp/application.log',
+            'formatter': 'full'
+        },
+        'service_log': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'tmp/service.log',
+            'formatter': 'full'
+        },
+        'audit_log': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'tmp/audit.log',
+            'formatter': 'full'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'django_log'],
+        },
+        'py.warnings': {
+            'handlers': ['console', 'app_log'],
+        },
+        'app': {
+            'handlers': ['console', 'app_log'],
+        },
+        'service': {
+            'handlers': ['service_log'],
+        },
+        'audit': {
+            'handlers': ['audit_log'],
+        },
+    }
+}
+
+# PATH="~/vp35/bin/python"
+#
+# CRONJOBS = [
+#     ('*/1 * * * *', 'management.cron.my_scheduled_job')
+# ]
+
+CRON_CLASSES = [
+    "management.cron.MyCronJob",
+    # ...
+]

@@ -1,5 +1,3 @@
-#create entry
-touchdown.#{siyang}
 build/
 tmp/
 *.sublime*
@@ -13,7 +11,3 @@ src/.elasticbeanstalk/*
 !.elasticbeanstalk/config.yml
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-
-
-# static file (managed by Django through collectstatic command)
-src/static/

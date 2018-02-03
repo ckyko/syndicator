@@ -33,7 +33,7 @@ class ProductType(AbstractSimpleObject):
     pass
 
 
-class Products(AbstractDatedObject):
+class Product(AbstractDatedObject):
     object_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     active = models.BooleanField(default=False)
     is_posted_to_other = models.BooleanField(default=False)
@@ -42,8 +42,8 @@ class Products(AbstractDatedObject):
     type = models.ForeignKey(ProductType, on_delete=models.PROTECT, related_name='products')
     description = models.TextField(null=True, blank=True)
     price = models.IntegerField(blank=True, null=True)
-    start_date = models.DateField(null=False)
-    end_date = models.DateField(null=False)
+    start_time = models.DateTimeField(null=False)
+    end_time = models.DateTimeField(null=False)
     # location = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='products')
 
     class Meta(AbstractDatedObject.Meta):
