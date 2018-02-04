@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime, timedelta
 
 from django_cron import CronJobBase, Schedule
 
@@ -17,7 +18,9 @@ class MyCronJob(CronJobBase):
     def do(self):
         # audit_logger.info('---------------START CRON JOB-----------------')
         print('---------------START CRON JOB-----------------')
-        products = Product.objects.filter(active=True, is_posted_to_other=False)
+        # products = Product.objects.filter(active=True, is_posted_to_other=False)
+        last_hour_date_time = datetime.now() - timedelta(hours=1)
+        products = Product.objects.filter(active=True, date_created__gt=last_hour_date_time)
 
         eventbrite_poster = EventbritePoster()
         for product in products:
