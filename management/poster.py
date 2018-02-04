@@ -45,3 +45,61 @@ class EventbritePoster(ProductPoster):
         return response.status_code
 
 
+class TicketleapPoster(ProductPoster):
+
+    def post_product(self, product):
+        url = "https://www.ticketleap.com/events/"
+        header = {
+            "Authorization": "",
+        }
+        payload = {
+            "title": product.name,
+
+        }
+        response = requests.post(url=url, headers=header, data=payload, verify=True)
+        print(response.status_code)
+
+        return response.status_code
+
+
+class TicketmasterPoster(ProductPoster):
+    """
+    see https://developer.ticketmaster.com/products-and-docs/apis/publish/#overview
+    """
+
+    def post_product(self, product):
+        url = "https://app.ticketmaster.com/publish/v2/events?apikey=" + ""
+        payload = {
+            "source": {
+                "id": "test_id_0009",
+                "name": "test-source"
+            },
+            "test": True,
+            "names": {
+                "en-us": "example test event tnt1"
+            },
+            "publicVisibility": {
+                "startDateTime": "2015-10-29T15:00:00Z",
+                "visible": True
+            },
+            "dates": {
+                "start": {
+                    "dateTime": "2016-04-15T01:00:00Z",
+                    "localDate": "2016-04-14",
+                    "localTime": "19:00:00"
+                },
+                "timezone": "America/Edmonton"
+            },
+            "venue": {
+                "source": {
+                    "id": "test_venue_id_0001",
+                    "name": "test-source"
+                }
+            }
+        }
+        response = requests.post(url=url, data=payload, verify=True)
+        print(response.status_code)
+
+        return response.status_code
+
+
