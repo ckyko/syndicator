@@ -220,4 +220,4 @@ try:
     EVENTBRITE_TOKEN = os.environ["E_TOKEN"]
 except KeyError:
     print("Error: environment variable E_TOKEN must be set.")
-    EVENTBRITE_TOKEN = "fake_token"
+    EVENTBRITE_TOKEN = "H75KJFJOQXM2XBZLVGOE"    # fake token
