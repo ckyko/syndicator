@@ -11,4 +11,5 @@ djangorestframework-jwt==1.10.0
 Markdown==2.6.8
 whitenoise==3.0
 django-crontab==0.7.1
+django-cron==0.5.0
 
