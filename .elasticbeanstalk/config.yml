@@ -3,7 +3,7 @@ branch-defaults:
     environment: django-syn
     group_suffix: null
 global:
-  application_name: django-tutorial
+  application_name: django-synd
   branch: null
   default_ec2_keyname: cky_key_pair
   default_platform: python3.4
