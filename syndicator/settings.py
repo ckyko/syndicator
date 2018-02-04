@@ -81,16 +81,25 @@ except KeyError:
     print("Error: environment variable DB_PASS must be set.")
     exit(1)
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'syn',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#         'USER': 'localuser',
+#         'PASSWORD': db_pass,
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'syn',
-        'HOST': 'localhost',
-        'PORT': '',
-        'USER': 'localuser',
-        'PASSWORD': db_pass,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -208,4 +217,4 @@ try:
     EVENTBRITE_TOKEN = os.environ["E_TOKEN"]
 except KeyError:
     print("Error: environment variable E_TOKEN must be set.")
-    exit(1)
+    EVENTBRITE_TOKEN = "fake_token"
