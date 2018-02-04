@@ -1,9 +1,9 @@
 branch-defaults:
   master:
-    environment: django-env
+    environment: django-syn
     group_suffix: null
 global:
-  application_name: django-syn
+  application_name: django-tutorial
   branch: null
   default_ec2_keyname: cky_key_pair
   default_platform: python3.4

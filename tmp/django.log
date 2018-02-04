@@ -489,3 +489,20 @@ requests.exceptions.MissingSchema: Invalid URL 'w.eventbriteapi.com/v3/users/me/
 [2018-02-04 00:57:02,261] - INFO - django.server [P19530]: "GET /admin/ HTTP/1.1" 200 4587
 [2018-02-04 01:09:57,873] - INFO - django.server [P20241]: "GET /admin/ HTTP/1.1" 200 4587
 [2018-02-04 01:09:59,408] - INFO - django.server [P20241]: "GET /admin/ HTTP/1.1" 200 4587
+[2018-02-04 01:38:10,845] - WARNING - django.request [P20911]: Not Found: /
+[2018-02-04 01:38:10,846] - WARNING - django.server [P20911]: "GET / HTTP/1.1" 404 2027
+[2018-02-04 01:40:37,653] - WARNING - django.request [P20975]: Not Found: /
+[2018-02-04 01:40:37,653] - WARNING - django.server [P20975]: "GET / HTTP/1.1" 404 2022
+[2018-02-04 01:40:38,634] - WARNING - django.request [P20975]: Not Found: /
+[2018-02-04 01:40:38,634] - WARNING - django.server [P20975]: "GET / HTTP/1.1" 404 2022
+[2018-02-04 01:40:41,992] - WARNING - django.request [P20975]: Not Found: /
+[2018-02-04 01:40:41,992] - WARNING - django.server [P20975]: "GET / HTTP/1.1" 404 2022
+[2018-02-04 01:40:45,991] - WARNING - django.request [P20975]: Not Found: /
+[2018-02-04 01:40:45,991] - WARNING - django.server [P20975]: "GET / HTTP/1.1" 404 2022
+[2018-02-04 01:40:55,332] - WARNING - django.request [P20975]: Not Found: /
+[2018-02-04 01:40:55,332] - WARNING - django.server [P20975]: "GET / HTTP/1.1" 404 2022
+[2018-02-04 01:40:55,993] - WARNING - django.request [P20975]: Not Found: /
+[2018-02-04 01:40:55,994] - WARNING - django.server [P20975]: "GET / HTTP/1.1" 404 2022
+[2018-02-04 01:40:57,575] - WARNING - django.request [P21005]: Not Found: /
+[2018-02-04 01:40:57,576] - WARNING - django.server [P21005]: "GET / HTTP/1.1" 404 2027
+[2018-02-04 01:41:01,932] - INFO - django.server [P21005]: "GET /admin/ HTTP/1.1" 200 4587

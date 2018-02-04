@@ -5,7 +5,7 @@ import requests
 from django.conf import settings
 from abc import ABCMeta, abstractmethod
 
-audit_logger = logging.getLogger('audit')
+# audit_logger = logging.getLogger('audit')
 
 
 class ProductPoster(metaclass=ABCMeta):
@@ -39,8 +39,8 @@ class EventbritePoster(ProductPoster):
         response = requests.post(url=url, headers=header, data=payload, verify=True)
         print(response.json())
         print(response.status_code)
-        if response.status_code != 200:
-            audit_logger.info(str(response.json()))
+        # if response.status_code != 200:
+            # audit_logger.info(str(response.json()))
 
         return response.status_code
 
