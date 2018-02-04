@@ -75,11 +75,11 @@ WSGI_APPLICATION = 'syndicator.wsgi.application'
 
 
 # databas settings
-try:
-    db_pass = os.environ["DB_PASS"]
-except KeyError:
-    print("Error: environment variable DB_PASS must be set.")
-    exit(1)
+# try:
+#     db_pass = os.environ["DB_PASS"]
+# except KeyError:
+#     print("Error: environment variable DB_PASS must be set.")
+#     exit(1)
 
 # DATABASES = {
 #     'default': {
@@ -138,6 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
 
 # LOGGING = {
 #     'version': 1,
