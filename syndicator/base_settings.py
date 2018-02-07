@@ -135,3 +135,9 @@ try:
 except KeyError:
     print("Error: environment variable E_TOKEN must be set.")
     EVENTBRITE_TOKEN = "H75KJFJOQXM2XBZLVGOE"    # fake token
+
+try:
+    TICKETLEAP_PASSWORD = os.environ["T_PASS"]
+except KeyError:
+    print("Error: environment variable T_PASS must be set.")
+    TICKETLEAP_PASSWORD = "123"    # fake token

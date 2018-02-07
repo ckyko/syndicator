@@ -4,6 +4,8 @@ import requests
 
 from django.conf import settings
 from abc import ABCMeta, abstractmethod
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 audit_logger = logging.getLogger('audit')
 
@@ -48,18 +50,43 @@ class EventbritePoster(ProductPoster):
 class TicketleapPoster(ProductPoster):
 
     def post_product(self, product):
-        url = "https://www.ticketleap.com/events/"
-        header = {
-            "Authorization": "",
-        }
-        payload = {
-            "title": product.name,
+        url = "https://www.ticketleap.com/login/"
 
-        }
-        response = requests.post(url=url, headers=header, data=payload, verify=True)
-        print(response.status_code)
+        driver = webdriver.Chrome()
+        driver.get(url)
+        driver.find_element_by_name("username").send_keys("ckykokoko@gmail.com")
+        driver.find_element_by_name("password").send_keys(settings.TICKETLEAP_PASSWORD)
+        driver.find_element_by_id("email_login_button").send_keys(Keys.RETURN)
+        driver.find_element_by_id("seller-nav-manage-events").send_keys(Keys.RETURN)
+        driver.find_element_by_css_selector("a.create-event-button").send_keys(Keys.RETURN)
+        driver.find_element_by_id("id_title").send_keys("e1")
+        elem = driver.find_element_by_id("id_slug").send_keys("e1")
+        # elem.send_keys(Keys.TAB + "aaaaaaaaaaaa")
+        # driver.find_element_by_css_selector("body.cke_editable_themed").send_keys("e111")
+        driver.switch_to.frame(driver.find_element_by_css_selector("iframe.cke_wysiwyg_frame"))
+        des = driver.find_element_by_tag_name("p")
+        # des = driver.find_element_by_xpath("/html/body/p")
+        # driver.execute_script("arguments[0].textContent = arguments[1];", des, "test description")
 
-        return response.status_code
+        # elem.clear()
+        # elem.send_keys(Keys.RETURN)
+        # driver.close()
+
+        return 400
+
+    # def post_product(self, product):
+    #     url = "https://www.ticketleap.com/events/"
+    #     header = {
+    #         "Authorization": "",
+    #     }
+    #     payload = {
+    #         "title": product.name,
+    #
+    #     }
+    #     response = requests.post(url=url, headers=header, data=payload, verify=True)
+    #     print(response.status_code)
+    #
+    #     return response.status_code
 
 
 class TicketmasterPoster(ProductPoster):

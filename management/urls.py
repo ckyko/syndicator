@@ -5,6 +5,7 @@ urlpatterns = [
 
     url(r'run$', views.index, name='index'),
     url(r'check_eventbrite_events$', views.eventbrite_events, name='events'),
+    url(r'test$', views.test, name='test'),
 
 
 ]
