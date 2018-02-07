@@ -79,7 +79,7 @@ except KeyError:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'syn',
+        'NAME': 'synprd',
         'HOST': db_host,
         'PORT': db_port,
         'USER': db_user,
