@@ -6,6 +6,9 @@ from django.conf import settings
 from abc import ABCMeta, abstractmethod
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 audit_logger = logging.getLogger('audit')
 
@@ -47,6 +50,34 @@ class EventbritePoster(ProductPoster):
         return response.status_code
 
 
+class TicketbudPoster(ProductPoster):
+
+    def post_product(self, product):
+        url = "https://ticketbud.com/users/sign_in"
+
+        driver = webdriver.Chrome()
+        driver.get(url)
+        driver.find_element_by_id("user_email").send_keys("ckykokoko@gmail.com")
+        driver.find_element_by_id("user_password").send_keys(settings.TICKETBUD_PASSWORD)
+        driver.find_element_by_id("user_password").send_keys(Keys.RETURN)
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "Start New Event"))
+        )
+        element.send_keys(Keys.RETURN)
+        driver.find_element_by_id("event-title").send_keys("title_for_test")
+        start_time_elem = driver.find_element_by_id("event-start")
+        start_time_elem.clear()
+        start_time_elem.send_keys("2/22/2018")
+        end_time_elem = driver.find_element_by_id("event-end")
+        end_time_elem.clear()
+        end_time_elem.send_keys("2/28/2018")
+        driver.find_element_by_xpath("//*[@id='start-your-event-step-three']/div/ul/li[2]/a").send_keys(Keys.RETURN)
+        driver.find_element_by_xpath("//*[@id='start-your-event-continue-controls']/button").send_keys(Keys.RETURN)
+        driver.close()
+
+        return 200
+
+
 class TicketleapPoster(ProductPoster):
 
     def post_product(self, product):
@@ -73,20 +104,6 @@ class TicketleapPoster(ProductPoster):
         # driver.close()
 
         return 400
-
-    # def post_product(self, product):
-    #     url = "https://www.ticketleap.com/events/"
-    #     header = {
-    #         "Authorization": "",
-    #     }
-    #     payload = {
-    #         "title": product.name,
-    #
-    #     }
-    #     response = requests.post(url=url, headers=header, data=payload, verify=True)
-    #     print(response.status_code)
-    #
-    #     return response.status_code
 
 
 class TicketmasterPoster(ProductPoster):

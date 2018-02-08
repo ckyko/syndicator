@@ -5,7 +5,7 @@ from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from .cron import MyCronJob
-from .poster import TicketleapPoster
+from .poster import TicketleapPoster, TicketbudPoster
 
 
 # Create your views here.
@@ -27,8 +27,15 @@ def eventbrite_events(request):
 
 
 @login_required
-def test(request):
+def test_tl(request):
     ticketleap_poster = TicketleapPoster()
     ticketleap_poster.post_product("fake_product_for_testing")
+
+    return HttpResponse("Finish test.")
+
+@login_required
+def test_tb(request):
+    tb_poster = TicketbudPoster()
+    tb_poster.post_product("fake_product_for_testing")
 
     return HttpResponse("Finish test.")
