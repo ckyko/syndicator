@@ -44,7 +44,6 @@ If you don't have an application key, you can request one:
         else:
             raise APIError("Non-200 HTTP response status: %s" % response['status'])
 
-# hashlib.md5('asd'.encode()).hexdigest()
     def login(self, user, password):
         "Login to the Eventful API as USER with PASSWORD."
         nonce = self.call('/users/login')['nonce']

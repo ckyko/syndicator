@@ -5,7 +5,6 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "ceeb-admin.us-east-2.elasticbeanstalk.com",
 ]
 
 LOGGING = {
@@ -67,23 +66,23 @@ LOGGING = {
     }
 }
 
-try:
-    db_host = os.environ["DB_HOST"]
-    db_port = os.environ["DB_PORT"]
-    db_user = os.environ["DB_USER"]
-    db_pass = os.environ["DB_PASS"]
-except KeyError:
-    print("Error: environment variable DB_HOST, DB_PORT, DB_USER, and DB_PASS must be set.")
-    exit(1)
+# try:
+#     db_host = os.environ["DB_HOST"]
+#     db_port = os.environ["DB_PORT"]
+#     db_user = os.environ["DB_USER"]
+#     db_pass = os.environ["DB_PASS"]
+# except KeyError:
+#     print("Error: environment variable DB_HOST, DB_PORT, DB_USER, and DB_PASS must be set.")
+#     exit(1)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'synprd',
-        'HOST': db_host,
-        'PORT': db_port,
-        'USER': db_user,
-        'PASSWORD': db_pass,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'synprd',
+#         'HOST': db_host,
+#         'PORT': db_port,
+#         'USER': db_user,
+#         'PASSWORD': db_pass,
+#     }
+# }
 

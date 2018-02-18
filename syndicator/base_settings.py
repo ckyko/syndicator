@@ -140,10 +140,10 @@ try:
     TICKETLEAP_PASSWORD = os.environ["TL_PASS"]
 except KeyError:
     print("Error: environment variable TL_PASS must be set.")
-    TICKETLEAP_PASSWORD = "123"    # fake token
+    TICKETLEAP_PASSWORD = "321321"    # fake token
 
 try:
     TICKETBUD_PASSWORD = os.environ["TB_PASS"]
 except KeyError:
     print("Error: environment variable TB_PASS must be set.")
-    TICKETBUD_PASSWORD = "123"    # fake token
+    TICKETBUD_PASSWORD = "321321"    # fake token

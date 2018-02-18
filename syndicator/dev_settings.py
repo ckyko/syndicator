@@ -76,20 +76,20 @@ LOGGING = {
 
 
 # databas settings
-try:
-    db_pass = os.environ["DB_PASS"]
-except KeyError:
-    print("Error: environment variable DB_PASS must be set.")
-    exit(1)
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'syn',
-        'HOST': 'localhost',
-        'PORT': '',
-        'USER': 'localuser',
-        'PASSWORD': db_pass,
-    }
-}
+# try:
+#     db_pass = os.environ["DB_PASS"]
+# except KeyError:
+#     print("Error: environment variable DB_PASS must be set.")
+#     exit(1)
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'syn',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#         'USER': 'localuser',
+#         'PASSWORD': db_pass,
+#     }
+# }
 
