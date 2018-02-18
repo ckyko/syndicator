@@ -12,3 +12,6 @@ src/.elasticbeanstalk/*
 !.elasticbeanstalk/*.global.yml
 
 key.sh
+
+ghostdriver.log
+
