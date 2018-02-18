@@ -27,3 +27,4 @@ simplejson==3.13.2
 uritemplate==3.0.0
 urllib3==1.22
 whitenoise==3.0
+selenium==3.9.0
