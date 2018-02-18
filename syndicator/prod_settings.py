@@ -1,10 +1,11 @@
 from .base_settings import *
 
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "synd.pgfgtrpmgh.us-east-1.elasticbeanstalk.com",
 ]
 
 LOGGING = {
