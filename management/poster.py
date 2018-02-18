@@ -81,7 +81,7 @@ class TicketbudPoster(ProductPoster):
             EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "Start New Event"))
         )
         element.send_keys(Keys.RETURN)
-        driver.find_element_by_id("event-title").send_keys("title_for_test")
+        driver.find_element_by_id("event-title").send_keys("title_for_test222")
         start_time_elem = driver.find_element_by_id("event-start")
         start_time_elem.clear()
         start_time_elem.send_keys("2/22/2018")
@@ -90,6 +90,9 @@ class TicketbudPoster(ProductPoster):
         end_time_elem.send_keys("2/28/2018")
         driver.find_element_by_xpath("//*[@id='start-your-event-step-three']/div/ul/li[2]/a").send_keys(Keys.RETURN)
         driver.find_element_by_xpath("//*[@id='start-your-event-continue-controls']/button").send_keys(Keys.RETURN)
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@id='admin-navigation-dashboard']/a"))
+        )
         driver.close()
 
         return 200
