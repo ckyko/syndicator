@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductType
+from .models import Product, ProductType, RepostApp
 
 
 class SimpleObjectModelAdmin(admin.ModelAdmin):
@@ -39,6 +39,8 @@ class ProductAdmin(admin.ModelAdmin):
                     'modified_by')
     list_filter = ('active', 'is_posted_to_other', 'date_created', 'date_modified', 'created_by', 'modified_by',)
 
+    filter_horizontal = ('need_repost',)
+
     search_fields = [
         'name',
     ]
@@ -56,6 +58,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': [
                 'active',
                 'is_posted_to_other',
+                'need_repost',
                 'name',
                 'type',
                 'description',
@@ -67,4 +70,5 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProductType, SimpleObjectModelAdmin)
+admin.site.register(RepostApp, SimpleObjectModelAdmin)
 admin.site.register(Product, ProductAdmin)

@@ -2,6 +2,7 @@
 import logging
 import requests
 
+
 from django.conf import settings
 from abc import ABCMeta, abstractmethod
 from selenium import webdriver
@@ -33,10 +34,10 @@ class EventbritePoster(ProductPoster):
         }
         payload = {
             "event.name.html": product.name,
-            "event.start.utc": '2018-02-9T13:00:00Z',
+            "event.start.utc": '2018-05-9T13:00:00Z',
             # "event.start.utc": product.start_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "event.start.timezone": "UTC",
-            "event.end.utc": '2018-02-10T13:00:00Z',
+            "event.end.utc": '2018-05-10T13:00:00Z',
             # "event.end.utc": product.end_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "event.end.timezone": "UTC",
             "event.currency": "USD"
@@ -48,6 +49,22 @@ class EventbritePoster(ProductPoster):
             audit_logger.info(str(response.json()))
 
         return response.status_code
+
+
+class EventfulPoster(ProductPoster):
+
+    def post_product(self, product):
+        url = "http://eventful.com/events/new"
+        # api = API('zzcNZHkCFvdT75KC')
+
+        # If you need to log in:
+        # api.login('ckykokoko2848f', '321321')
+        #
+        # events = api.call('/events/search', q='music', l='San Diego')
+        # for event in events['events']['event']:
+        #     print("%s at %s" % (event['title'], event['venue_name']))
+
+        return 200
 
 
 class TicketbudPoster(ProductPoster):
@@ -91,13 +108,20 @@ class TicketleapPoster(ProductPoster):
         driver.find_element_by_id("seller-nav-manage-events").send_keys(Keys.RETURN)
         driver.find_element_by_css_selector("a.create-event-button").send_keys(Keys.RETURN)
         driver.find_element_by_id("id_title").send_keys("e1")
-        elem = driver.find_element_by_id("id_slug").send_keys("e1")
-        # elem.send_keys(Keys.TAB + "aaaaaaaaaaaa")
-        # driver.find_element_by_css_selector("body.cke_editable_themed").send_keys("e111")
+        driver.find_element_by_id("id_slug").send_keys("e1")
         driver.switch_to.frame(driver.find_element_by_css_selector("iframe.cke_wysiwyg_frame"))
-        des = driver.find_element_by_tag_name("p")
-        # des = driver.find_element_by_xpath("/html/body/p")
-        # driver.execute_script("arguments[0].textContent = arguments[1];", des, "test description")
+        a = driver.page_source
+        print(a)
+        driver.find_element_by_xpath("/html/body").click()
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "/html/body/p"))
+        )
+        driver.execute_script("arguments[0].textContent = arguments[1];", element, "test description")
+        driver.switch_to.default_content()
+
+        driver.find_element_by_xpath("//*[@id='create-event-appearance']/div[2]/div[1]/table/tbody/tr[1]/td[2]/div[1]/a").click()
+        driver.find_element_by_xpath("//*[@id='hero-image-dialog']/div[2]/div/div[1]/div[1]/div[2]/table/tbody/tr[2]/td[2]/div/div[1]").click()
+        driver.find_element_by_xpath("//*[@id='hero-image-dialog']/div[2]/div/div[2]/button[1]").click()
 
         # elem.clear()
         # elem.send_keys(Keys.RETURN)
