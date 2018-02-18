@@ -1,18 +1,16 @@
 branch-defaults:
   master:
-    environment: django-syn
-    group_suffix: null
+    environment: synd
 global:
-  application_name: django-synd
+  application_name: synd
   branch: null
-  default_ec2_keyname: cky_key_pair
+  default_ec2_keyname: aws-eb
   default_platform: python3.4
   default_region: us-east-1
-  include_git_submodules: true
   instance_profile: null
   platform_name: null
   platform_version: null
-  profile: eb-cli
+  profile: null
   repository: null
   sc: git
   workspace_type: Application
