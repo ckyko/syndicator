@@ -2,7 +2,6 @@
 import logging
 import requests
 
-
 from django.conf import settings
 from abc import ABCMeta, abstractmethod
 from selenium import webdriver
@@ -10,8 +9,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 audit_logger = logging.getLogger('audit')
+DEFAULT_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
 
 
 class ProductPoster(metaclass=ABCMeta):
@@ -72,7 +73,13 @@ class TicketbudPoster(ProductPoster):
     def post_product(self, product):
         url = "https://ticketbud.com/users/sign_in"
 
-        driver = webdriver.Chrome()
+        # driver = webdriver.Chrome()
+        dcap = dict(DesiredCapabilities.PHANTOMJS)
+        dcap["phantomjs.page.settings.userAgent"] = DEFAULT_USER_AGENT
+        driver = webdriver.PhantomJS(service_args=['--ssl-protocol=any'], desired_capabilities=dcap)
+        driver.implicitly_wait(10)
+        # driver = webdriver.PhantomJS(service_args=['--ssl-protocol=any'])
+        # driver.implicitly_wait(10)
         driver.get(url)
         driver.find_element_by_id("user_email").send_keys("ckykokoko@gmail.com")
         driver.find_element_by_id("user_password").send_keys(settings.TICKETBUD_PASSWORD)
