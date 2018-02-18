@@ -81,7 +81,7 @@ class TicketbudPoster(ProductPoster):
             EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "Start New Event"))
         )
         element.send_keys(Keys.RETURN)
-        driver.find_element_by_id("event-title").send_keys("title_for_test222")
+        driver.find_element_by_id("event-title").send_keys(product.name)
         start_time_elem = driver.find_element_by_id("event-start")
         start_time_elem.clear()
         start_time_elem.send_keys("2/22/2018")

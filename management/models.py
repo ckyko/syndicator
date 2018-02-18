@@ -41,7 +41,7 @@ class Product(AbstractDatedObject):
     object_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     active = models.BooleanField(default=False)
     is_posted_to_other = models.BooleanField(default=False)
-    need_repost = models.ManyToManyField(RepostApp)
+    need_repost = models.ManyToManyField(RepostApp, blank=True)
 
     name = models.CharField(max_length=255)
     type = models.ForeignKey(ProductType, on_delete=models.PROTECT, related_name='products')
