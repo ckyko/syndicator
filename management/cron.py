@@ -23,12 +23,7 @@ class MyCronJob(CronJobBase):
 
     def do(self):
         audit_logger.info('---------------START CRON JOB-----------------')
-        print('---------------START CRON JOB-----------------')
         products = Product.objects.filter(active=True, need_repost__isnull=False).distinct()
-        print(products)
-
-        # eventbrite_poster = EventbritePoster()
-        # ticketbud_poster = TicketbudPoster()
 
         for product in products:
             for poster in product.need_repost.all():
@@ -38,8 +33,6 @@ class MyCronJob(CronJobBase):
                 audit_logger.info(str(product) + ' - ' + str(status))
                 if status == 200:
                     product.need_repost.remove(poster)
-                    print("removed...")
-                    # print(product.need_repost.all())
         audit_logger.info('---------------END CRON JOB---------------')
 
 

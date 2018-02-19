@@ -44,8 +44,6 @@ class EventbritePoster(ProductPoster):
             "event.currency": "USD"
         }
         response = requests.post(url=url, headers=header, data=payload, verify=True)
-        print(response.json())
-        print(response.status_code)
         if response.status_code != 200:
             audit_logger.info(str(response.json()))
 
@@ -78,8 +76,6 @@ class TicketbudPoster(ProductPoster):
         dcap["phantomjs.page.settings.userAgent"] = DEFAULT_USER_AGENT
         driver = webdriver.PhantomJS(service_args=['--ssl-protocol=any'], desired_capabilities=dcap)
         driver.implicitly_wait(10)
-        # driver = webdriver.PhantomJS(service_args=['--ssl-protocol=any'])
-        # driver.implicitly_wait(10)
         driver.get(url)
         driver.find_element_by_id("user_email").send_keys("ckykokoko@gmail.com")
         driver.find_element_by_id("user_password").send_keys(settings.TICKETBUD_PASSWORD)
@@ -87,7 +83,11 @@ class TicketbudPoster(ProductPoster):
         element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, "Start New Event"))
         )
-        element.send_keys(Keys.RETURN)
+        element.click()
+        # title_element = WebDriverWait(driver, 10).until(
+        #     EC.presence_of_element_located((By.ID, "event-title"))
+        # )
+        # title_element.send_keys(product.name)
         driver.find_element_by_id("event-title").send_keys(product.name)
         start_time_elem = driver.find_element_by_id("event-start")
         start_time_elem.clear()
@@ -96,10 +96,13 @@ class TicketbudPoster(ProductPoster):
         end_time_elem.clear()
         end_time_elem.send_keys("2/28/2018")
         driver.find_element_by_xpath("//*[@id='start-your-event-step-three']/div/ul/li[2]/a").send_keys(Keys.RETURN)
-        driver.find_element_by_xpath("//*[@id='start-your-event-continue-controls']/button").send_keys(Keys.RETURN)
-        element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@id='admin-navigation-dashboard']/a"))
-        )
+        driver.find_element_by_xpath("//*[@id='start-your-event-continue-controls']/button").click()
+        # element = WebDriverWait(driver, 10).until(
+        #     EC.presence_of_element_located((By.ID, "copy-event-url-dashboard"))
+        #     # EC.presence_of_element_located((By.XPATH, "//*[@id='admin-navigation-dashboard']/a"))
+        # )
+        copy_element = driver.find_element_by_id("copy-event-url-dashboard")
+        copy_element.click()
         driver.close()
 
         return 200
@@ -121,7 +124,6 @@ class TicketleapPoster(ProductPoster):
         driver.find_element_by_id("id_slug").send_keys("e1")
         driver.switch_to.frame(driver.find_element_by_css_selector("iframe.cke_wysiwyg_frame"))
         a = driver.page_source
-        print(a)
         driver.find_element_by_xpath("/html/body").click()
         element = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "/html/body/p"))
